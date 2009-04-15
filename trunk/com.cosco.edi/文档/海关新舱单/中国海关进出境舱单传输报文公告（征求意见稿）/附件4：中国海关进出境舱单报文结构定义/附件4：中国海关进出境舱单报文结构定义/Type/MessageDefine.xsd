@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by lei_ying (szc) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="Message" targetNamespace="Message" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="DataModelVersion">
+		<xs:annotation>
+			<xs:documentation>数据模型版本号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="2"/>
+			<xs:enumeration value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Version">
+		<xs:annotation>
+			<xs:documentation>报文版本号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1.0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Xmlns">
+		<xs:annotation>
+			<xs:documentation>命名空间</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:1101:1">
+				<xs:annotation>
+					<xs:documentation>海运原始舱单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:1201:1">
+				<xs:annotation>
+					<xs:documentation>空运原始舱单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:2101:1">
+				<xs:annotation>
+					<xs:documentation>海运预配舱单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:2201:1">
+				<xs:annotation>
+					<xs:documentation>空运预配舱单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:3101:1">
+				<xs:annotation>
+					<xs:documentation>海运出口运抵</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:3102:1">
+				<xs:annotation>
+					<xs:documentation>海运分流运抵</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:3201:1">
+				<xs:annotation>
+					<xs:documentation>空运出口运抵</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:3202:1">
+				<xs:annotation>
+					<xs:documentation>空运分流运抵</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:4101:1">
+				<xs:annotation>
+					<xs:documentation>海运出口装载</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:4201:1">
+				<xs:annotation>
+					<xs:documentation>空运出口装载</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:5101:1">
+				<xs:annotation>
+					<xs:documentation>海运进口理货</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:5102:1">
+				<xs:annotation>
+					<xs:documentation>海运出口理货</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:5201:1">
+				<xs:annotation>
+					<xs:documentation>空运进口理货</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:5202:1">
+				<xs:annotation>
+					<xs:documentation>空运出口理货</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:6101:1">
+				<xs:annotation>
+					<xs:documentation>海运进口分流</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:6102:1">
+				<xs:annotation>
+					<xs:documentation>海运进口分拨</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:6201:1">
+				<xs:annotation>
+					<xs:documentation>空运进口分流</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:6202:1">
+				<xs:annotation>
+					<xs:documentation>空运进口分拨</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="urn:wco:datamodel:standard:CN:7101:1">
+				<xs:annotation>
+					<xs:documentation>海运出口装箱清单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<!--xs:enumeration value="urn:wco:datamodel:standard:CN:[name]:1">
+				<xs:annotation>
+					<xs:documentation>命名空间格式</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration-->
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

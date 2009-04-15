@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by lei_ying (szc) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="Response" xmlns:ResponseTypeCode="ResponseTypeCode" targetNamespace="Response" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="ResponseTypeCode" schemaLocation="..\CodeList\ResponseTypeCode.xsd"/>
+	<xs:complexType name="ResponseTypeCode">
+		<xs:annotation>
+			<xs:documentation>回执类型代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="ResponseTypeCode:ResponseTypeCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ResponseTypeText">
+		<xs:annotation>
+			<xs:documentation>回执类型详细描述</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

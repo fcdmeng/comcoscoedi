@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by lei_ying (szc) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="CountrySubEntityCode" targetNamespace="CountrySubEntityCode" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="CountrySubEntityCode">
+		<xs:annotation>
+			<xs:documentation>省份（地区）代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="4"/>
+			<xs:maxLength value="5"/>
+			<xs:pattern value="[A-Z]{2}\d{2,3}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

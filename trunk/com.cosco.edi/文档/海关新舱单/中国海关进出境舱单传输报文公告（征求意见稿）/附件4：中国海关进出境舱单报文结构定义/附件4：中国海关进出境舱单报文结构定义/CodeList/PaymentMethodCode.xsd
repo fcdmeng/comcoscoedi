@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="PaymentMethodCode" targetNamespace="PaymentMethodCode" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="PaymentMethodCode">
+		<xs:annotation>
+			<xs:documentation>运费支付方法代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+			<xs:enumeration value="CC">
+				<xs:annotation>
+					<xs:documentation>Collect到付</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PO">
+				<xs:annotation>
+					<xs:documentation>PO：Prepaid only预付</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

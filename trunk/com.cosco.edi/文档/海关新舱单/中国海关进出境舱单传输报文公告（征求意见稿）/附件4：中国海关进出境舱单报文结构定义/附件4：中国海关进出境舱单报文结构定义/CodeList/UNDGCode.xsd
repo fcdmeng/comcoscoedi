@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="UNDGCode" targetNamespace="UNDGCode" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="UNDGCode">
+		<xs:annotation>
+			<xs:documentation>联合国危品标识代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

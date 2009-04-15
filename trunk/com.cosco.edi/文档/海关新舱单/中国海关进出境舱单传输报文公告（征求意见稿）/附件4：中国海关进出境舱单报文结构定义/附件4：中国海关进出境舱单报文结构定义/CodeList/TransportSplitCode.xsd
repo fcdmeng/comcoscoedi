@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="TransportSplitCode" targetNamespace="TransportSplitCode" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="TransportSplitCode">
+		<xs:annotation>
+			<xs:documentation>承运人货物分批到/发货标识</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="0">
+				<xs:annotation>
+					<xs:documentation>不分批</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1">
+				<xs:annotation>
+					<xs:documentation>分批</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

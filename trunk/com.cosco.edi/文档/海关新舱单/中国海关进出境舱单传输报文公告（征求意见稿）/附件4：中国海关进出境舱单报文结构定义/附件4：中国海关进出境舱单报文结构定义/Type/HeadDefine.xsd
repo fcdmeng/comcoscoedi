@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by lei_ying (szc) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:DateTimeDefine="DateTimeDefine" xmlns:FunctionCode="FunctionCode" xmlns:DeclarationTypeCode="DeclarationTypeCode" xmlns:Message="Message" xmlns="Head" targetNamespace="Head" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="DateTimeDefine" schemaLocation="DateTimeDefine.xsd"/>
+	<xs:import namespace="FunctionCode" schemaLocation="..\CodeList\FunctionCode.xsd"/>
+	<xs:import namespace="DeclarationTypeCode" schemaLocation="..\CodeList\DeclarationTypeCode.xsd"/>
+	<xs:import namespace="Message" schemaLocation="MessageDefine.xsd"/>
+	<!--报文头结构定义>
+	<xs:complexType name="Head">
+		<xs:annotation>
+			<xs:documentation>报文头</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MessageID" type="HeadMessageIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>报文编号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FunctionCode" type="DeclarationFunctionCode">
+				<xs:annotation>
+					<xs:documentation>017 报文功能代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MessageType" type="DeclarationTypeCode">
+				<xs:annotation>
+					<xs:documentation>001 报文类型代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SenderID" type="HeadSenderIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>发送方代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReceiverID" type="HeadReceiverIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>接受方代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SendTime" type="HeadSendDateTime">
+				<xs:annotation>
+					<xs:documentation>发送时间 格式:YYYYMMDDhhmmssfff</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version" type="HeadVersionText">
+				<xs:annotation>
+					<xs:documentation>报文版本</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType-->
+	<!--报文头元素定义-->
+	<xs:simpleType name="HeadMessageIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>报文编号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DeclarationFunctionCode">
+		<xs:annotation>
+			<xs:documentation>017 报文功能代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="FunctionCode:FunctionCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="DeclarationTypeCode">
+		<xs:annotation>
+			<xs:documentation>001 报文类型代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DeclarationTypeCode:DeclarationTypeCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="HeadSenderIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>发送方代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="HeadReceiverIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>接受方代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:complexType name="HeadSendDateTime">
+		<xs:annotation>
+			<xs:documentation>发送时间</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DateTimeDefine:DateTimeWithMillisecond"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="HeadVersionText">
+		<xs:annotation>
+			<xs:documentation>报文版本</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="Message:Version"/>
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>
