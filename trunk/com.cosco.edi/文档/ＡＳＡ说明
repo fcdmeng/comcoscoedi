@@ -1,0 +1,158 @@
+  dbstop.exe   -c   "uid=dba;pwd=sql;eng=db_zjgl;"
+  dbeng.exe   -Q
+  
+  
+  Sybase ASA9/10的简易使用
+  Sybase除了大型商用关系数据库ASE以外，还有非常有名的嵌入式数据库，称为Adaptive Server Anywhere，到了版本10，就改称为Sql Anywhere。自从Sybase收购mobile365以后，它也越来越受到更多的关注了。
+当你安装完ASA以后，你会发现这个软件包居然有很大，ASA9大约有170M左右，ASA10的windows版本可以达到240M左右。
+
+实际上，我们经常能用到的东西仅需要其中几个目录就可以，将这些目录提取出来，压缩以后，就4M左右。本文介绍的内容仅供学习者自己探索，如果商用，请尊重版权。
+1. 必要的环境变量
+ASA9涉及到的环境变量主要有两个，
+set ASANY9=d:\SybaseASA9
+set ASANYSH9=d:\SybaseASA9\Shared
+ASA10涉及到的环境变量主要也是两个，
+set SQLANY10=D:\SybaseASA10
+set SQLANYSH10=D:\SybaseASA10
+注意变量名称的变化。所谓share目录主要用于存放jconnect, sybcentral等jdbc驱动、sybcentral GUI客户端工具等
+
+2. 量体裁衣
+原始的目录结构可能是如下的样子：
+ce
+charsets
+docs
+drivers
+h
+java
+MobiLink
+Palm
+readme.txt
+Samples
+scripts
+Shared
+snmp
+support
+temp
+ultralite
+win32
+
+这里有很多都是不需要的。经过处理，我可以只留下win32和scripts子目录就可以让ASA工作。而shared目录下边的jdbc驱动完全是独立的，你完全可以把它抽到别的地方。
+
+在做了这样的工作以后，现下需要写一个批处理脚本用于启动ASA数据库。
+a. asa-setenv.bat (用于设置环境变量)
+@echo off
+set ASANY9=D:\SybaseASA9
+if not "%ASANY9%" == "" set PATH=%ASANY9%\win32;%PATH%
+
+b. asa-init.bat (这个显然用于建立ASA的数据库)
+@echo off
+call "%~dp0asa-setenv.bat"
+echo Initializing Database...
+echo %ASANY9%\win32\dbinit.exe %*
+"%ASANY9%\win32\dbinit.exe" %*
+
+c. asa-startsvr.bat (以Server模式启动ASA数据库)
+@echo off
+call "%~dp0asa-setenv.bat"
+echo Starting Database...
+echo %ASANY9%\win32\dbsrv9.exe %*
+"%ASANY9%\win32\dbsrv9.exe" %*
+
+d. asa-starteng.bat(以Personal DB的模式启动ASA数据库)
+@echo off
+call "%~dp0asa-setenv.bat"
+echo Starting Database...
+echo %ASANY9%\win32\dbeng9.exe %*
+"%ASANY9%\win32\dbeng9.exe" %*
+
+e. asa-stop.bat (停止数据库)
+@echo off
+call "%~dp0asa-setenv.bat"
+echo Stopping Database...
+echo %ASANY9%\win32\dbstop.exe %*
+"%ASANY9%\win32\dbstop.exe" %*
+
+我们来看一个示例：
+1.创建一个新的ASA数据库文件：
+D:\shared\ASA902>asa-init eherodemo.db
+Initializing Database...
+D:\shared\ASA902\win32\dbinit.exe eherodemo.db
+Adaptive Server Anywhere Initialization Utility Version 9.0.2.3302
+Creating system tables
+Collation sequence:  936ZHO
+Creating system views
+Setting permissions on system tables and views
+Setting option values
+Initializing UltraLite deployment option
+Database "eherodemo.db" created successfully
+
+2. 以Server模式启动eherodemo.db
+D:\shared\ASA902>asa-start eherodemo.db
+Starting Database...
+D:\shared\ASA902\win32\dbsrv9.exe eherodemo.db
+ransaction log: eherodemo.log
+Starting checkpoint of "eherodemo" (eherodemo.db) at Fri Jul 20 2007 14:20
+Finished checkpoint of "eherodemo" (eherodemo.db) at Fri Jul 20 2007 14:20
+Database "eherodemo" (eherodemo.db) started at Fri Jul 20 2007 14:20
+Database server started at Fri Jul 20 2007 14:20
+Trying to start SharedMemory link ...
+
+    SharedMemory link started successfully
+
+Trying to start NamedPipes link ...
+
+    NamedPipes link started successfully
+
+Trying to start TCPIP link ...
+
+Starting on port 2638
+    TCPIP link started successfully
+
+Trying to start SPX link ...
+
+SPX communication link not started
+
+Now accepting requests
+
+3. 多带几个参数来启动
+asa-start.bat -x tcpip(ServerPort=2638) -n testdemodb eherodemo.db
+表示启来的数据库的servername是testdemodb，但数据库文件名是eherodemo.db，不带-n选项，则数据库名就是eherodemo
+
+PersonalDB和Server DB的区别在于，前者只用于单机客户端访问，而后者可以为多个远程客户端提供并发访问。
+
+针对ASA10, 它为ASA9提供了升级工具：
+这里有一个脚本用于简单的将asa9数据库升级到asa10数据库，脚本内容(asa-unload.bat)：
+@echo off
+setlocal
+call "%~dp0asa-setenv.bat"
+echo Unloading Database...
+echo %SQLANY10%\win32\dbunload.exe %*
+"%SQLANY10%\win32\dbunload.exe" %*
+endlocal
+
+下边是一个升级的运行结果：
+d:\shared\ASA100>asa-unload.bat -c "dbf=d:\shared\asa902\eherotest.db;uid=dba;pw
+d=sql" -n eherotest10.db
+Unloading Database...
+d:\shared\ASA100\..\ASA100\win32\dbunload.exe -c "dbf=d:\shared\asa902\eherotest
+.db;uid=dba;pwd=sql" -n eherotest10.db
+SQL Anywhere Unload Utility Version 10.0.0.2745
+Connecting and initializing
+Unloading user and group definitions
+Unloading table definitions
+Unloading index definitions
+Unloading functions
+Unloading view definitions
+Unloading procedures
+Unloading triggers
+Unloading SQL Remote definitions
+Unloading MobiLink definitions
+
+使用起来非常方便。
+
+最后，我们可以借用Openclient或者ASA安装时带有的一个jdbc连接工具来连接数据库，这叫jutils。大概有1.2M左右。附件放不下。
+感觉兴趣的可以到邮箱iiihero  AT  hotmail.com中索取。
+我将其打包放到附件里边。也非常好用。不仅可以连接ASA，也可以用来连接ASE。
+
+我在我的blog里也为ASA写了两篇更简单的短文，作了相关介绍，有兴趣可以看看：
+http://hi.baidu.com/hexiong/blog ... 5b2f177e3e6f57.html
