@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.freqds.base.EdiControl;
+import com.freqds.mapping.base.BaseCountry;
 
 public class BaseCountryDialog extends TitleAreaDialog {
 	//国家代码
@@ -23,7 +24,7 @@ public class BaseCountryDialog extends TitleAreaDialog {
 	private Text countryCnameText;
 	//国家英文名称
 	private Text countryEnameText;
-	
+	private BaseCountry country;
 	/**
 	 * Create the dialog
 	 * @param parentShell
@@ -56,7 +57,7 @@ public class BaseCountryDialog extends TitleAreaDialog {
 		countryCnameText = control.createTextField(container);
 		control.createLabel(container, "英文名称");
 		countryEnameText = control.createTextField(container);
-		
+		setValues();
 		return area;
 	}
 
@@ -102,9 +103,25 @@ public class BaseCountryDialog extends TitleAreaDialog {
 				return;
 			}
 			
+			country.setCountry_code(StringUtils.stripToEmpty(countryCodeText.getText()));
+			country.setCountry_ename(StringUtils.stripToEmpty(countryEnameText.getText()));
+			country.setCountry_cname(StringUtils.stripToEmpty(countryCnameText.getText()));
 		}
 			
 		super.buttonPressed(buttonId);
+	}
+
+	public BaseCountry getCountry() {
+		return country;
+	}
+
+	public void setCountry(BaseCountry country) {
+		this.country = country;
+	}
+	public void setValues(){
+		countryCodeText.setText(StringUtils.stripToEmpty(country.getCountry_code()));
+		countryCnameText.setText(StringUtils.stripToEmpty(country.getCountry_cname()));
+		countryEnameText.setText(StringUtils.stripToEmpty(country.getCountry_ename()));
 	}
 
 }
