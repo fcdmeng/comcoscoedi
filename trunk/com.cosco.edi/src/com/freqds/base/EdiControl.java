@@ -41,7 +41,7 @@ public class EdiControl {
 	/**
 	 * Utility method that creates a combo box
 	 * 
-	 * @param parent
+	 * @param parent=========================
 	 *            the parent for the new label
 	 * @return the new widget
 	 */
@@ -246,7 +246,7 @@ public class EdiControl {
 	}
 
 
-	// Éú³ÉGridData¶ÔÏóµÄÖØ¸´´úÂëÌ«¶à£¬Ð´³ÉÒ»¸ö·½·¨¿ÉÒÔ¼õÉÙ³ÌÐòµÄÐÐÊý£¬ÓÃÆðÀ´Ò²·½±ãÐ©
+	// ï¿½ï¿½ï¿½GridDataï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½Ì«ï¿½à£¬Ð´ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Ù³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4Ò²ï¿½ï¿½ï¿½ï¿½Ð©
 	public GridData createGridData(int style, int horizontalSpan) {
 		GridData gridData = new GridData(style);
 		gridData.horizontalSpan = horizontalSpan;
