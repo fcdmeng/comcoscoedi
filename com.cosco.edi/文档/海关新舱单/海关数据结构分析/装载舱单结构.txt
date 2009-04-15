@@ -1,0 +1,41 @@
+循环次数   节点名称
+   1       Manifest
+   1       |______ Head				（报文头）
+   1       |       |______ MessageID				（报文编号）
+   1       |       |______ FunctionCode				（报文功能代码）
+   1       |       |______ MessageType				（报文类型代码）
+   1       |       |______ SenderID					（发送方代码）
+   1       |       |______ ReceiverID				（接受方代码）
+   1       |       |______ SendTime					（发送时间）
+   1       |       |______ Version					（报文版本）
+   1       |______ Declaration		（报文体）
+   1       |       |______ Carrier					（承运人信息）
+   1       |       |       |______ ID					（承运人代码	LOD_001）
+   1       |       |______ BorderTransportMeans		（运输工具信息）
+   1       |       |       |______ JourneyID				（航次航班编码	LOD_002）
+   1       |       |       |______ TypeCode				（运输方式代码	LOD_003）
+   1       |       |       |______ ID					（运输工具代码	LOD_004）
+   1       |       |       |______ Name					（运输工具名称	LOD_005）
+9999   |       |______ Consignment				（提单信息）
+   1       |       |       |______ TransportContractDocument		（运输合同信息）
+   1       |       |       |       |______ ID						（总提运单号			LOD_007）
+   1       |       |       |______ LoadingLocation				（装货地信息）
+   1       |       |       |       |______ ID						（装货地代码			LOD_008）
+   1       |       |       |       |______ LoadingDate				（货物装载运输工具时间	LOD_006）
+   1       |       |       |______ ConsignmentPackaging			（提运单包装信息）
+   1       |       |       |       |______ QuantityQuantity			（托运货物件数			LOD_009）
+   1       |       |       |       |______ TypeCode					（包装种类代码			LOD_010）
+   1       |       |       |______ TotalGrossMassMeasure		（货物总毛重			LOD_011）
+   1       |       |       |______ TransportSplitIndicator			（承运人货物分批到发标识LOD_012）
+9999   |       |       |______ TransportEquipment			（集装箱信息）
+   1       |       |       |       |______ EquipmentIdentification		（集装箱编号信息）
+   1       |       |       |       |       |______ ID					（集装箱编号			LOD_013）
+   1       |       |       |       |______ CharacteristicCode			（集装箱尺寸和类型		LOD_014）
+   1       |       |       |       |______ FullnessCode				（重箱或者空想标识代码	LOD_015）
+   9       |       |       |       |______ SealID					（封志号码、类型和施加封志人）
+   1       |       |       |       |       |______ AgencyCode			（施加封志人			LOD_016）
+9999   |       |       |______ ConsignmentItem				（托运货物详细信息）
+   1       |       |       |       |______ Commodity				（货物简要信息）
+   1       |       |       |       |       |______ CargoDescription		（货物简要描述			LOD_017）
+   1       |       |______ AdditionalInformation				（补充信息）
+   1       |       |       |______ Content						（备注					LOD_018）
