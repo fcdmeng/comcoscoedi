@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2008 (http://www.altova.com) by lei_ying (szc) -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="Message" targetNamespace="Message" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--
+		edited with XMLSpy v2008 (http://www.altova.com) by lei_ying (szc)
+	-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="Message"
+	targetNamespace="Message" elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
 	<xs:simpleType name="DataModelVersion">
 		<xs:annotation>
 			<xs:documentation>数据模型版本号</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="2"/>
-			<xs:enumeration value="3"/>
+			<xs:enumeration value="2" />
+			<xs:enumeration value="3" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Version">
@@ -15,7 +19,7 @@
 			<xs:documentation>报文版本号</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="1.0"/>
+			<xs:enumeration value="1.0" />
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Xmlns">
@@ -118,11 +122,11 @@
 					<xs:documentation>海运出口装箱清单</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-			<!--xs:enumeration value="urn:wco:datamodel:standard:CN:[name]:1">
-				<xs:annotation>
-					<xs:documentation>命名空间格式</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration-->
+			<!--
+				xs:enumeration value="urn:wco:datamodel:standard:CN:[name]:1">
+				<xs:annotation> <xs:documentation>命名空间格式</xs:documentation>
+				</xs:annotation> </xs:enumeration
+			-->
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
