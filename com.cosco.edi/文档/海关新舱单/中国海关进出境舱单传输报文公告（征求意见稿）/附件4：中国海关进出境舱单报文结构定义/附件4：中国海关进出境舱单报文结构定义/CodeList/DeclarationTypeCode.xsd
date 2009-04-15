@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="DeclarationTypeCode" targetNamespace="DeclarationTypeCode" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="DeclarationTypeCode">
+		<xs:annotation>
+			<xs:documentation>001 报文类型代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="1101">
+				<xs:annotation>
+					<xs:documentation>海运原始舱单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="1201">
+				<xs:annotation>
+					<xs:documentation>空运原始舱单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2101">
+				<xs:annotation>
+					<xs:documentation>海运预配舱单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="2201">
+				<xs:annotation>
+					<xs:documentation>空运预配舱单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3101">
+				<xs:annotation>
+					<xs:documentation>海运出口运抵</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3102">
+				<xs:annotation>
+					<xs:documentation>海运分流运抵</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3201">
+				<xs:annotation>
+					<xs:documentation>空运出口运抵</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="3202">
+				<xs:annotation>
+					<xs:documentation>空运分流运抵</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4101">
+				<xs:annotation>
+					<xs:documentation>海运出口装载</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="4201">
+				<xs:annotation>
+					<xs:documentation>空运出口装载</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5101">
+				<xs:annotation>
+					<xs:documentation>海运进口理货</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5102">
+				<xs:annotation>
+					<xs:documentation>海运出口理货</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5201">
+				<xs:annotation>
+					<xs:documentation>空运进口理货</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="5202">
+				<xs:annotation>
+					<xs:documentation>空运出口理货</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6101">
+				<xs:annotation>
+					<xs:documentation>海运进口分流</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6102">
+				<xs:annotation>
+					<xs:documentation>海运进口分拨</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6201">
+				<xs:annotation>
+					<xs:documentation>空运进口分流</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="6202">
+				<xs:annotation>
+					<xs:documentation>空运进口分拨</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="7101">
+				<xs:annotation>
+					<xs:documentation>海运出口装箱清单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="8101">
+				<xs:annotation>
+					<xs:documentation>海运出口改船</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="8201">
+				<xs:annotation>
+					<xs:documentation>空运出口改单</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ORDER">
+				<xs:annotation>
+					<xs:documentation>通关指令</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

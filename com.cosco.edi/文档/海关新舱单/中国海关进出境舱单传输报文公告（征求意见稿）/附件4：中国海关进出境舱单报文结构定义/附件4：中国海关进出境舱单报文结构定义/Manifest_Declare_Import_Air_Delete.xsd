@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by lei_ying (szc) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:decl="urn:Declaration:datamodel:standard:CN:1201:1" xmlns:Head="Head" xmlns:Declaration="Declaration" xmlns:xdb="http://xmlns.oracle.com/xdb" xmlns:Message="Message" targetNamespace="urn:Declaration:datamodel:standard:CN:1201:1" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="Head" schemaLocation="Type/HeadDefine.xsd"/>
+	<xs:import namespace="Declaration" schemaLocation="Type/DeclarationDefine.xsd"/>
+	<xs:import namespace="Message" schemaLocation="Type/MessageDefine.xsd"/>
+	<xs:element name="Manifest" type="decl:Manifest">
+		<xs:annotation>
+			<xs:documentation>空运原始舱单删除</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="Manifest">
+		<xs:annotation>
+			<xs:documentation>空运原始舱单删除</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Head" type="decl:Head">
+				<xs:annotation>
+					<xs:documentation>报文头</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Declaration">
+				<xs:annotation>
+					<xs:documentation>报文体</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="decl:Declaration">
+							
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+				<xs:unique name="DeclarationUnique">
+					<xs:annotation>
+						<xs:documentation>约束：总提运单+分提运单在同一份报文中不重复</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:Consignment"/>
+					<xs:field xpath="decl:AssociatedTransportDocument/decl:ID"/>
+					<xs:field xpath="decl:TransportContractDocument/decl:ID"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--报文头结构定义-->
+	<xs:complexType name="Head">
+		<xs:annotation>
+			<xs:documentation>报文头</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MessageID" type="Head:HeadMessageIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>报文编号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FunctionCode" type="Head:DeclarationFunctionCode">
+				<xs:annotation>
+					<xs:documentation>017 报文功能代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MessageType" type="Head:DeclarationTypeCode">
+				<xs:annotation>
+					<xs:documentation>001 报文类型代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SenderID" type="Head:HeadSenderIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>发送方代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ReceiverID" type="Head:HeadReceiverIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>接受方代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SendTime" type="Head:HeadSendDateTime">
+				<xs:annotation>
+					<xs:documentation>发送时间 格式:YYYYMMDDhhmmssfff</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version" type="Head:HeadVersionText">
+				<xs:annotation>
+					<xs:documentation>报文版本</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Declaration">
+		<xs:annotation>
+			<xs:documentation>报文体</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="RepresentativePerson" type="decl:RepresentativePerson">
+				<xs:annotation>
+					<xs:documentation>舱单传输人信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ExitCustomsOffice" type="decl:ExitCustomsOffice" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>运输工具离境地海关信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Agent" type="decl:Agent" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>运输工具代理企业信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Carrier" type="decl:Carrier" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>承运人信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="BorderTransportMeans" type="decl:BorderTransportMeans">
+				<xs:annotation>
+					<xs:documentation>运输工具信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Consignment" type="decl:Consignment" maxOccurs="9999">
+				<xs:annotation>
+					<xs:documentation>提运单信息</xs:documentation>
+				</xs:annotation>
+				<xs:unique name="RoutingCountryUnique">
+					<xs:annotation>
+						<xs:documentation>约束：同一提运单下途经国家不重复</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:RoutingCountry"/>
+					<xs:field xpath="."/>
+				</xs:unique>
+				<xs:unique name="CustomsStatusUnique">
+					<xs:annotation>
+						<xs:documentation>约束：同一提运单下货物海关状态代码不重复</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:CustomsStatus"/>
+					<xs:field xpath="."/>
+				</xs:unique>
+				<xs:keyref name="ConsignmentItemKeyRef" refer="decl:TransportEquipmentUnique">
+					<xs:annotation>
+						<xs:documentation>约束：同一提运单下货物所在集装箱必须在集装箱数据集中</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:ConsignmentItem/decl:EquipmentIdentification"/>
+					<xs:field xpath="decl:ID"/>
+				</xs:keyref>
+				<xs:unique name="ConsignmentItemUnique">
+					<xs:annotation>
+						<xs:documentation>约束：托运货物序号在提运单下唯一</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:ConsignmentItem"/>
+					<xs:field xpath="decl:SequenceNumeric"/>
+				</xs:unique>
+				<xs:unique name="TransportEquipmentUnique">
+					<xs:annotation>
+						<xs:documentation>约束：同一提运单下集装箱号唯一</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:TransportEquipment"/>
+					<xs:field xpath="decl:EquipmentIdentification/decl:ID"/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="AdditionalInformation" type="decl:AdditionalInformation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>备注</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RepresentativePerson">
+		<xs:annotation>
+			<xs:documentation>舱单传输人信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="Declaration:RepresentativePersonNameText">
+				<xs:annotation>
+					<xs:documentation>256 Representative person name 舱单传输人名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExitCustomsOffice">
+		<xs:annotation>
+			<xs:documentation>运输工具离境地海关信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:ExitCustomsOfficeIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>047 Customs office of exit code 运输工具离境地海关代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Agent">
+		<xs:annotation>
+			<xs:documentation>运输工具代理企业信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:AgentIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>061 Agent code 运输工具代理企业代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Carrier">
+		<xs:annotation>
+			<xs:documentation>承运人信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:CarrierIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>050 Carrier identification 承运人代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BorderTransportMeans">
+		<xs:annotation>
+			<xs:documentation>运输工具信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="JourneyID" type="Declaration:BorderTransportMeansJourneyIdentifier">
+				<xs:annotation>
+					<xs:documentation>149 Conveyance reference number 航次航班编号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TypeCode" type="Declaration:BorderTransportMeansTypeCode" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>183 Mode/type of means of transport crossing the border code 运输方式代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ID" type="Declaration:BorderTransportMeansIdentificationIdentifier" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>167 Identification of means of transport crossing the border code 运输工具代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="Declaration:BorderTransportMeansNameText" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>160 Identification of means of transport crossing the border 运输工具名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FirstArrivalLocationID" type="Declaration:BorderTransportMeansFirstArrivalLocationIdentifier" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>085 First port of arrival code 运输工具抵达关境内第一个目的港代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ArrivalDateTime" type="Declaration:BorderTransportMeansArrivalDateTime" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>172 Date and time of arrival at first port of arrival in Customs territory 运输工具抵达关境内第一个目的港的日期和时间  格式为：YYYYMMDDhhmmZZZ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DepartureDateTime" type="Declaration:BorderTransportMeansDepartureDateTime" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>156 Departure date and time 运输工具启运日期和时间  格式为：YYYYMMDDhhmmZZZ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Consignment">
+		<xs:annotation>
+			<xs:documentation>提运单信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TransportContractDocument" type="decl:TransportContractDocument">
+				<xs:annotation>
+					<xs:documentation>运输合同信息</xs:documentation>
+				</xs:annotation>
+				<xs:unique name="ChangeReasonCodeUnique">
+					<xs:annotation>
+						<xs:documentation>约束：变更原因代码不重复</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:ChangeReasonCode"/>
+					<xs:field xpath="."/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="AssociatedTransportDocument" type="decl:AssociatedTransportDocument" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>运输合同附加信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GrossVolumeMeasure" type="Declaration:ConsignmentGrossVolumeMeasure" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>134 Cube 货物体积</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ValueAmount" type="Declaration:ConsignmentValue" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>110 Consignment value 托运货物价值</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LoadingLocation" type="decl:LoadingLocation" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>装货地信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UnloadingLocation" type="decl:UnloadingLocation" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>卸货地信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GoodsReceiptPlace" type="decl:GoodsReceiptPlace" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>收货地信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TranshipmentLocation" type="decl:TranshipmentLocation" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>中转地信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransitDestination" type="decl:TransitDestination" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>中转目的地信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="RoutingCountryCode" type="Declaration:ConsignmentRoutingCountryCode" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>064 Country(ies) of routing,coded 途经的国家代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GoodsConsignedPlace" type="decl:GoodsConsignedPlace" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>货物托运地信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomsStatusCode" type="Declaration:ConsignmentCustomsStatusCode" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>094 Customs status of goods code 货物海关状态代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransportSplitIndicator" type="Declaration:ConsignmentTransportSplitIndicator" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>011 Carrier split  consignment indicator 承运人货物分批到/发货标识</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FreightPayment" type="decl:FreightPayment" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>运费支付信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConsignmentPackaging" type="decl:ConsignmentPackaging" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>提运单包装信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TotalGrossMassMeasure" type="Declaration:ConsignmentTotalGrossMassMeasure" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>131 Total gross weight 货物总毛重</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PreviousCustomsDocument" type="decl:PreviousCustomsDocument" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>前一海关单证信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DeliveryDestination" type="decl:DeliveryDestinationAddress" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>货物交互信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Handling" type="decl:Handling" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>码头作业信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IntermediateCarrier" type="decl:IntermediateCarrier" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>中间承运人信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Consignee" type="decl:Consignee" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>收货人信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Consignor" type="decl:Consignor" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>发货人信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NotifyParty" type="decl:NotifyParty" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>通知人信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UNDGContact" type="decl:UNDGContact" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>危险品联系人信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TransportEquipment" type="decl:TransportEquipment" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>集装箱（器）信息</xs:documentation>
+				</xs:annotation>
+				<xs:unique name="SealIDUnique">
+					<xs:annotation>
+						<xs:documentation>约束：集装箱铅封号不重复</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:SealID"/>
+					<xs:field xpath="."/>
+				</xs:unique>
+			</xs:element>
+			<xs:element name="ConsignmentItem" type="decl:ConsignmentItem" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>托运货物详细信息</xs:documentation>
+				</xs:annotation>
+				<xs:unique name="ConsignmentEquipmentIdentificationUnique">
+					<xs:annotation>
+						<xs:documentation>约束：货物明细信息下集装箱号唯一</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:EquipmentIdentification"/>
+					<xs:field xpath="decl:ID"/>
+				</xs:unique>
+				<xs:unique name="UCRUnique">
+					<xs:annotation>
+						<xs:documentation>约束：同一票货物明细信息中UCR不重复</xs:documentation>
+					</xs:annotation>
+					<xs:selector xpath="decl:UCR"/>
+					<xs:field xpath="decl:ID"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PreviousCustomsDocument">
+		<xs:annotation>
+			<xs:documentation>前一海关单证信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:PreviousCustomsDocumentIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>007 Previous Customs document number 前一海关单证号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TypeCode" type="Declaration:PreviousCustomsDocumentTypeCode">
+				<xs:annotation>
+					<xs:documentation>186 Previous Customs document type code 前一海关单证类型代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TransportContractDocument">
+		<xs:annotation>
+			<xs:documentation>运输合同信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:TransportContractDocumentIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>015 Transport document number 总提运单号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ChangeReasonCode" type="Declaration:TransportContractDocumentChangeReasonCode" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>099 Amendment code 更改原因代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConditionCode" type="Declaration:TransportContractDocumentConditionCode" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>091 Contract and carriage condition code 运输条款代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Deconsolidator" type="decl:Deconsolidator" minOccurs="0" maxOccurs="0">
+				<xs:annotation>
+					<xs:documentation>拆箱信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssociatedTransportDocument">
+		<xs:annotation>
+			<xs:documentation>运输合同附加信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:AssociatedTransportDocumentIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>189 Associated transport document number 分提运单号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LoadingLocation">
+		<xs:annotation>
+			<xs:documentation>装货地信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:LoadingLocationIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>070 Place of loading, coded 装货地代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="LoadingDate" type="Declaration:LoadingLocationLoadingDate">
+				<xs:annotation>
+					<xs:documentation>031 Consignment loading date 货物装载运输工具时间  格式为：YYYYMMDDhhmmZZZ</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UnloadingLocation">
+		<xs:annotation>
+			<xs:documentation>卸货地信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:UnloadingLocationIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>080 Place of discharge code 卸货地代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ArrivalDate" type="Declaration:UnloadingLocationArrivalDate">
+				<xs:annotation>
+					<xs:documentation>173 Date of arrival at place of discharge 到达卸货地日期 格式为：YYYYMMDD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GoodsReceiptPlace">
+		<xs:annotation>
+			<xs:documentation>收货地信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:GoodsReceiptPlaceIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>055 Goods receipt place code 收货地点代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="Declaration:GoodsReceiptPlaceNameText">
+				<xs:annotation>
+					<xs:documentation>054 Goods receipt place 收货地点名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TranshipmentLocation">
+		<xs:annotation>
+			<xs:documentation>中转地信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:TranshipmentLocationIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>084 Transshipment place code 中转地点代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TransitDestination">
+		<xs:annotation>
+			<xs:documentation>中转目的地信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:TransitDestinationIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>182 Place of destination of the transit code 中转目的地代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GoodsConsignedPlace">
+		<xs:annotation>
+			<xs:documentation>货物托运地信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:GoodsConsignedPlaceIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>202 Place or country whence consigned code 货物托运的地点或者国家代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FreightPayment">
+		<xs:annotation>
+			<xs:documentation>运费支付信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MethodCode" type="Declaration:FreightPaymentMethodCode">
+				<xs:annotation>
+					<xs:documentation>098 Transport charges method of payment code 运费支付方法代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConsignmentPackaging">
+		<xs:annotation>
+			<xs:documentation>提运单包装信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="QuantityQuantity" type="Declaration:ConsignmentPackagingQuantityQuantity">
+				<xs:annotation>
+					<xs:documentation>146 Total number of packages 托运货物件数</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TypeCode" type="Declaration:PackagingTypeCode">
+				<xs:annotation>
+					<xs:documentation>141 Type of packages identification 包装种类代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Handling">
+		<xs:annotation>
+			<xs:documentation>码头作业信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="InstructionsCodeCode" type="Declaration:HandlingInstructionsCodeCode">
+				<xs:annotation>
+					<xs:documentation>093 Handling instructions,coded 码头作业指令代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Communication">
+		<xs:annotation>
+			<xs:documentation>通讯方式信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:CommunicationIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>240 Communication number 通讯方式号码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TypeID" type="Declaration:CommunicationTypeIdentifier">
+				<xs:annotation>
+					<xs:documentation>253 Communication number Type 通讯方式类别代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IntermediateCarrier">
+		<xs:annotation>
+			<xs:documentation>中间承运人信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:IntermediateCarrierIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>199 Intermediate Carrier Identification 中间承运人标识</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Communication" type="decl:Communication" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>中间承运人联系方式</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Consignee">
+		<xs:annotation>
+			<xs:documentation>收货人信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:ConsigneeIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>052 Consignee coded 收货人代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="Declaration:ConsigneeNameText">
+				<xs:annotation>
+					<xs:documentation>051 Consignee name 收货人名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Address" type="decl:ConsigneeAddress">
+				<xs:annotation>
+					<xs:documentation>收货人地址信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Communication" type="decl:Communication" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>收货人联系方式</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Contact" type="decl:Contact">
+				<xs:annotation>
+					<xs:documentation>收货具体联系人信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConsigneeAddress">
+		<xs:annotation>
+			<xs:documentation>收货人地址信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Line" type="Declaration:AddressLineText">
+				<xs:annotation>
+					<xs:documentation>239 Street and number/P.O.Box 详细地址（街道,邮箱）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CityName" type="Declaration:AddressCityNameText">
+				<xs:annotation>
+					<xs:documentation>241 City name 城市名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountrySubEntityID" type="Declaration:AddressCountrySubEntityIdentifier">
+				<xs:annotation>
+					<xs:documentation>244 Country sub-entity 省份代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountrySubEntityName" type="Declaration:AddressCountrySubEntityNameText">
+				<xs:annotation>
+					<xs:documentation>243 Country sub-entity，name 省份名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostcodeID" type="Declaration:AddressPostcodeIdentifier">
+				<xs:annotation>
+					<xs:documentation>245 Postcode identification 邮政编码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountryCode" type="Declaration:AddressCountryCode">
+				<xs:annotation>
+					<xs:documentation>242 Country code 国家代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Consignor">
+		<xs:annotation>
+			<xs:documentation>发货人信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:ConsignorIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>072 Consignor code 发货人代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="Declaration:ConsignorNameText">
+				<xs:annotation>
+					<xs:documentation>071 consignor name 发货人名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Address" type="decl:ConsignorAddress">
+				<xs:annotation>
+					<xs:documentation>发货人地址信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Communication" type="decl:Communication" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>发货人联系方式</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConsignorAddress">
+		<xs:annotation>
+			<xs:documentation>发货人地址信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Line" type="Declaration:AddressLineText">
+				<xs:annotation>
+					<xs:documentation>239 Street and number/P.O.Box 详细地址（街道,邮箱）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CityName" type="Declaration:AddressCityNameText">
+				<xs:annotation>
+					<xs:documentation>241 City name 城市名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountrySubEntityID" type="Declaration:AddressCountrySubEntityIdentifier">
+				<xs:annotation>
+					<xs:documentation>244 Country sub-entity 省份代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountrySubEntityName" type="Declaration:AddressCountrySubEntityNameText">
+				<xs:annotation>
+					<xs:documentation>243 Country sub-entity，name 省份名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostcodeID" type="Declaration:AddressPostcodeIdentifier">
+				<xs:annotation>
+					<xs:documentation>245 Postcode identification 邮政编码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountryCode" type="Declaration:AddressCountryCode">
+				<xs:annotation>
+					<xs:documentation>242 Country code 国家代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Deconsolidator">
+		<xs:annotation>
+			<xs:documentation>拆箱信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:DeconsolidatorIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>195 Deconsolidator,coded 拆箱人代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeliveryDestinationAddress">
+		<xs:annotation>
+			<xs:documentation>货物交付地址信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Line" type="Declaration:AddressLineText">
+				<xs:annotation>
+					<xs:documentation>239 Street and number/P.O.Box 货物交付目的地地址（街道,邮箱）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CityName" type="Declaration:AddressCityNameText">
+				<xs:annotation>
+					<xs:documentation>241 City name 城市名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountrySubEntityID" type="Declaration:AddressCountrySubEntityIdentifier">
+				<xs:annotation>
+					<xs:documentation>244 Country sub-entity 省份代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountrySubEntityName" type="Declaration:AddressCountrySubEntityNameText">
+				<xs:annotation>
+					<xs:documentation>243 Country sub-entity，name 省份名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostcodeID" type="Declaration:AddressPostcodeIdentifier">
+				<xs:annotation>
+					<xs:documentation>245 Postcode identification 邮政编码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountryCode" type="Declaration:AddressCountryCode">
+				<xs:annotation>
+					<xs:documentation>242 Country code 国家代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NotifyParty">
+		<xs:annotation>
+			<xs:documentation>通知人信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:NotifyPartyIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>058 Notify party code  通知人代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="Declaration:NotifyPartyNameText">
+				<xs:annotation>
+					<xs:documentation>057 Notify party 通知人名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Address" type="decl:NotifypartyAddress">
+				<xs:annotation>
+					<xs:documentation>通知人地址信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Communication" type="decl:Communication" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>通知人联系方式</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NotifypartyAddress">
+		<xs:annotation>
+			<xs:documentation>通知人地址信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Line" type="Declaration:AddressLineText">
+				<xs:annotation>
+					<xs:documentation>239 Street and number/P.O.Box 详细地址（街道,邮箱）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CityName" type="Declaration:AddressCityNameText">
+				<xs:annotation>
+					<xs:documentation>241 City name 城市名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountrySubEntityID" type="Declaration:AddressCountrySubEntityIdentifier">
+				<xs:annotation>
+					<xs:documentation>244 Country sub-entity 省份代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountrySubEntityName" type="Declaration:AddressCountrySubEntityNameText">
+				<xs:annotation>
+					<xs:documentation>243 Country sub-entity，name 省份名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PostcodeID" type="Declaration:AddressPostcodeIdentifier">
+				<xs:annotation>
+					<xs:documentation>245 Postcode identification 邮政编码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CountryCode" type="Declaration:AddressCountryCode">
+				<xs:annotation>
+					<xs:documentation>242 Country code 国家代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UNDGContact">
+		<xs:annotation>
+			<xs:documentation>危险品联系人信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="Declaration:UNDGContactNameText">
+				<xs:annotation>
+					<xs:documentation>045 Dangerous goods contact details 危险品联系人姓名</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Communication" type="decl:Communication" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>危险品联系人联系方式</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Contact">
+		<xs:annotation>
+			<xs:documentation>具体联系人信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Name" type="Declaration:ContactNameText">
+				<xs:annotation>
+					<xs:documentation>246 Department or employee contact name 具体联系人名称</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Communication" type="decl:Communication" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>具体联系人联系方式i</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TransportEquipment">
+		<xs:annotation>
+			<xs:documentation>集装箱信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="EquipmentIdentification" type="decl:EquipmentIdentification">
+				<xs:annotation>
+					<xs:documentation>集装箱（器）编号信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CharacteristicCode" type="Declaration:TransportEquipmentCharacteristicCode">
+				<xs:annotation>
+					<xs:documentation>152 Equipment size and type identification 集装箱（器）尺寸和类型</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SupplierPartyTypeCode" type="Declaration:TransportEquipmentSupplierPartyTypeCode">
+				<xs:annotation>
+					<xs:documentation>151 Equipment supplier type code 集装箱（器）来源代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="FullnessCode" type="Declaration:TransportEquipmentFullnessCode">
+				<xs:annotation>
+					<xs:documentation>154 Transport equipment loaded status 重箱或者空箱标识代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SealID" type="Declaration:SealNumber" maxOccurs="9">
+				<xs:annotation>
+					<xs:documentation>165 Seal number 封志号码，类型和施加封志人</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EquipmentIdentification">
+		<xs:annotation>
+			<xs:documentation>集装箱（器）编号信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:EquipmentIdentificationIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>159 Equipment identification number 集装箱（器）编号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConsignmentItem">
+		<xs:annotation>
+			<xs:documentation>托运货物详细信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SequenceNumeric" type="Declaration:ConsignmentItemSequenceNumeric">
+				<xs:annotation>
+					<xs:documentation>006 Consignment item sequence number 托运货物序号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ConsignmentItemPackaging" type="decl:ConsignmentItemPackaging">
+				<xs:annotation>
+					<xs:documentation>托运货物详细包装信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Commodity" type="decl:Commodity">
+				<xs:annotation>
+					<xs:documentation>货物简要信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="AdditionalInformation" type="decl:AdditionalInformation">
+				<xs:annotation>
+					<xs:documentation>补充信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GoodsMeasure" type="decl:GoodsMeasure">
+				<xs:annotation>
+					<xs:documentation>货物数量信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="EquipmentIdentification" type="decl:EquipmentIdentification" maxOccurs="9999">
+				<xs:annotation>
+					<xs:documentation>集装箱（器）编号信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CustomsProcedure" type="decl:CustomsProcedure">
+				<xs:annotation>
+					<xs:documentation>海关手续信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UCR" type="decl:UCR" maxOccurs="99">
+				<xs:annotation>
+					<xs:documentation>唯一托运信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Origin" type="decl:Origin">
+				<xs:annotation>
+					<xs:documentation>原产国信息</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ConsignmentItemPackaging">
+		<xs:annotation>
+			<xs:documentation>托运货物详细包装信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="QuantityQuantity" type="Declaration:ConsignmentItemPackagingQuantityQuantity">
+				<xs:annotation>
+					<xs:documentation>139 Number of packages per commodity 货物详细件数</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TypeCode" type="Declaration:PackagingTypeCode">
+				<xs:annotation>
+					<xs:documentation>141 Type of packages identification 包装种类代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MarksNumbers" type="Declaration:ConsignmentItemPackagingMarksNumbersText">
+				<xs:annotation>
+					<xs:documentation>142 Shipping marks  唛头</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GoodsMeasure">
+		<xs:annotation>
+			<xs:documentation>货物数量信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="GrossMassMeasure" type="Declaration:GoodsMeasureGrossMassMeasure">
+				<xs:annotation>
+					<xs:documentation>126 Gross weight item level 货物毛重</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CustomsProcedure">
+		<xs:annotation>
+			<xs:documentation>海关手续信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CurrentCode" type="Declaration:CustomsProcedureCurrentCode">
+				<xs:annotation>
+					<xs:documentation>166 Customs procedure code 海关手续代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Origin">
+		<xs:annotation>
+			<xs:documentation>原产国信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OriginCountryCode" type="Declaration:OriginOriginCountryCode">
+				<xs:annotation>
+					<xs:documentation>063 Country of origin code 原产国代码</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UCR">
+		<xs:annotation>
+			<xs:documentation>唯一托运信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ID" type="Declaration:UCRIdentificationIdentifier">
+				<xs:annotation>
+					<xs:documentation>016 Unique consignment reference number 唯一托运编号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Commodity">
+		<xs:annotation>
+			<xs:documentation>货物简要信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CargoDescription" type="Declaration:CommodityCargoDescriptionText">
+				<xs:annotation>
+					<xs:documentation>138 Brief cargo description  货物简要描述</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="UNDGCode" type="Declaration:CommodityUNDGCode">
+				<xs:annotation>
+					<xs:documentation>143 UNDG Number(Dangerous Goods Code) 危险品编号</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="TariffClassificationCode" type="Declaration:CommodityTariffClassificationCode">
+				<xs:annotation>
+					<xs:documentation>145 Tariff code number(Customs) 海关税则编号（6位HS CODE）</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdditionalInformation">
+		<xs:annotation>
+			<xs:documentation>补充信息</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Content" type="Declaration:AdditionalInformationContentText">
+				<xs:annotation>
+					<xs:documentation>105 Free text 备注</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

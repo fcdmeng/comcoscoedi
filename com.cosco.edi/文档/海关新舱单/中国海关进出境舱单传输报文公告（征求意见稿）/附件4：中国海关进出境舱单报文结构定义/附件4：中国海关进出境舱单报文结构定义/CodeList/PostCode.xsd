@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by lei_ying (szc) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="PostCode" targetNamespace="PostCode" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="PostCode">
+		<xs:annotation>
+			<xs:documentation>邮政代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="6"/>
+			<xs:pattern value="\d{6}"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by lei_ying (szc) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="Declaration" xmlns:TransportTypeCode="TransportTypeCode" xmlns:DateTimeDefine="DateTimeDefine" xmlns:CurrencyTypeCode="CurrencyTypeCode" xmlns:CountryCode="CountryCode" xmlns:PaymentMethodCode="PaymentMethodCode" xmlns:PackagingTypeCode="PackagingTypeCode" xmlns:TransportContractDocumentConditionCode="TransportContractDocumentConditionCode" xmlns:HandlingInstructionsCode="HandlingInstructionsCode" xmlns:CommunicationType="CommunicationType" xmlns:TransportEquipmentSupplierPartyTypeCode="TransportEquipmentSupplierPartyTypeCode" xmlns:TransportEquipmentFullnessCode="TransportEquipmentFullnessCode" xmlns:DamageTypeCode="DamageTypeCode" xmlns:DamageAreaCode="DamageAreaCode" xmlns:TransportEquipmentCategoryCode="TransportEquipmentCategoryCode" xmlns:ChangeReasonCode="ChangeReasonCode" xmlns:TransportSplitCode="TransportSplitCode" xmlns:PostCode="PostCode" xmlns:TransportEquipmentCharacteristicCode="TransportEquipmentCharacteristicCode" xmlns:SealAgencyCode="SealAgencyCode" xmlns:UNDGCode="UNDGCode" xmlns:CountrySubEntityCode="CountrySubEntityCode" xmlns:CustomsProcedureCode="CustomsProcedureCode" xmlns:CustomsStatusCode="CustomsStatusCode" xmlns:CustomsCode="CustomsCode" targetNamespace="Declaration" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="TransportTypeCode" schemaLocation="..\CodeList\TransportTypeCode.xsd"/>
+	<xs:import namespace="DateTimeDefine" schemaLocation="DateTimeDefine.xsd"/>
+	<xs:import namespace="CurrencyTypeCode" schemaLocation="..\CodeList\CurrencyTypeCode.xsd"/>
+	<xs:import namespace="CountryCode" schemaLocation="..\CodeList\CountryCode.xsd"/>
+	<xs:import namespace="PaymentMethodCode" schemaLocation="..\CodeList\PaymentMethodCode.xsd"/>
+	<xs:import namespace="PackagingTypeCode" schemaLocation="..\CodeList\PackagingTypeCode.xsd"/>
+	<xs:import namespace="TransportContractDocumentConditionCode" schemaLocation="..\CodeList\TransportContractDocumentConditionCode.xsd"/>
+	<xs:import namespace="HandlingInstructionsCode" schemaLocation="..\CodeList\HandlingInstructionsCode.xsd"/>
+	<xs:import namespace="CommunicationType" schemaLocation="..\CodeList\CommunicationType.xsd"/>
+	<xs:import namespace="TransportEquipmentSupplierPartyTypeCode" schemaLocation="..\CodeList\TransportEquipmentSupplierPartyTypeCode.xsd"/>
+	<xs:import namespace="TransportEquipmentFullnessCode" schemaLocation="..\CodeList\TransportEquipmentFullnessCode.xsd"/>
+	<xs:import namespace="DamageTypeCode" schemaLocation="..\CodeList\DamageTypeCode.xsd"/>
+	<xs:import namespace="DamageAreaCode" schemaLocation="..\CodeList\DamageAreaCode.xsd"/>
+	<xs:import namespace="TransportEquipmentCategoryCode" schemaLocation="..\CodeList\TransportEquipmentCategoryCode.xsd"/>
+	<xs:import namespace="ChangeReasonCode" schemaLocation="..\CodeList\ChangeReasonCode.xsd"/>
+	<xs:import namespace="TransportSplitCode" schemaLocation="..\CodeList\TransportSplitCode.xsd"/>
+	<xs:import namespace="PostCode" schemaLocation="..\CodeList\PostCode.xsd"/>
+	<xs:import namespace="TransportEquipmentCharacteristicCode" schemaLocation="..\CodeList\TransportEquipmentCharacteristicCode.xsd"/>
+	<xs:import namespace="SealAgencyCode" schemaLocation="..\CodeList\SealAgencyCode.xsd"/>
+	<xs:import namespace="UNDGCode" schemaLocation="..\CodeList\UNDGCode.xsd"/>
+	<xs:import namespace="CountrySubEntityCode" schemaLocation="..\CodeList\CountrySubEntityCode.xsd"/>
+	<xs:import namespace="CustomsProcedureCode" schemaLocation="..\CodeList\CustomsProcedureCode.xsd"/>
+	<xs:import namespace="CustomsStatusCode" schemaLocation="..\CodeList\CustomsStatusCode.xsd"/>
+	<xs:import namespace="CustomsCode" schemaLocation="..\CodeList\CustomsCode.xsd"/>
+	<xs:simpleType name="RepresentativePersonNameText">
+		<xs:annotation>
+			<xs:documentation>256 Representative person name 舱单传输人名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+			<xs:pattern value="[A-Za-z0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExitCustomsOfficeIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>047 Customs office of exit code 运输工具离境地海关代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+			<xs:pattern value="[A-Za-z0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AgentIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>061 Agent code 运输工具代理企业代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+			<xs:pattern value="[A-Za-z0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CarrierIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>050 Carrier identification 承运人代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+			<xs:pattern value="[A-Za-z0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CarrierNameText">
+		<xs:annotation>
+			<xs:documentation>049 Carrier name 承运人名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BorderTransportMeansJourneyIdentifier">
+		<xs:annotation>
+			<xs:documentation>149 Conveyance reference number 航次航班编号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+			<xs:pattern value="(([A-Z0-9]+)/((((1[6-9]|[2-9]\d)\d{2})(0[13578]|1[02])(0[1-9]|[12]\d|3[01]))|(((1[6-9]|[2-9]\d)\d{2})(0[13456789]|1[012])(0[1-9]|[12]\d|30))|(((1[6-9]|[2-9]\d)\d{2})02(0[1-9]|1\d|2[0-8]))|(((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))0229)))|([A-Z0-9]+)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BorderTransportMeansTypeCode">
+		<xs:annotation>
+			<xs:documentation>183 Mode/type of means of transport crossing the border code 运输方式代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="TransportTypeCode:TransportTypeCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="BorderTransportMeansIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>167 Identification of means of transport crossing the border code 运输工具代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="25"/>
+			<xs:pattern value="[A-Z0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BorderTransportMeansNameText">
+		<xs:annotation>
+			<xs:documentation>160 Identification of means of transport crossing the border 运输工具名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="LoadingLocationLoadingDate">
+		<xs:annotation>
+			<xs:documentation>031 Consignment loading date 货物装载运输工具时间  格式为：YYYYMMDDhhmmZZZ</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DateTimeDefine:DateTimeWithZone"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="BorderTransportMeansFirstArrivalLocationIdentifier">
+		<xs:annotation>
+			<xs:documentation>085 First port of arrival code 运输工具抵达关境内第一个目的港代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+			<xs:pattern value="([A-Za-z0-9]+/[A-Za-z0-9]+)|([A-Za-z0-9]+)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BorderTransportMeansArrivalDateTime">
+		<xs:annotation>
+			<xs:documentation>172 Date and time of arrival at first port of arrival in Customs territory 运输工具抵达关境内第一个目的港的日期和时间  格式为：YYYYMMDDhhmmZZZ</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DateTimeDefine:DateTimeWithZone"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="BorderTransportMeansDepartureDateTime">
+		<xs:annotation>
+			<xs:documentation>156 Departure date and time 运输工具启运日期和时间  格式为：YYYYMMDDhhmmZZZ</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DateTimeDefine:DateTimeWithZone"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="TransportContractDocumentIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>015 Transport document number 总提运单号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+			<xs:pattern value="[A-Z0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AssociatedTransportDocumentIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>189 Associated transport document number 分提运单号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+			<xs:pattern value="[A-Z0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConsignmentGrossVolumeMeasure">
+		<xs:annotation>
+			<xs:documentation>134 Cube 货物体积</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="10"/>
+			<xs:fractionDigits value="0"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConsignmentValueAmount">
+		<xs:annotation>
+			<xs:documentation>110 Consignment value 托运货物价值</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0"/>
+			<xs:totalDigits value="16"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ConsignmentValue">
+		<xs:annotation>
+			<xs:documentation>托运货物价值</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="ConsignmentValueAmount">
+				<xs:attribute name="CurrencyTypeCode" type="CurrencyTypeCode:CurrencyTypeCode" use="required">
+					<xs:annotation>
+						<xs:documentation>135 Currency, coded 金额类型代码</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="UnloadingLocationIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>080 Place of discharge code 卸货地代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+			<xs:pattern value="([A-Za-z0-9]+/[A-Za-z0-9]+)|([A-Za-z0-9]+)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="UnloadingLocationArrivalDate">
+		<xs:annotation>
+			<xs:documentation>173 Date of arrival at place of discharge 到达卸货地日期 格式为：YYYYMMDD</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DateTimeDefine:Date"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="GoodsReceiptPlaceIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>055 Goods receipt place code 收货地点代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+			<xs:pattern value="([A-Za-z0-9]+/[A-Za-z0-9]+)|([A-Za-z0-9]+)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GoodsReceiptPlaceNameText">
+		<xs:annotation>
+			<xs:documentation>054 Goods receipt place 收货地点名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="70"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TranshipmentLocationIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>084 Transshipment place code 中转地点代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+			<xs:pattern value="([A-Za-z0-9]+/[A-Za-z0-9]+)|([A-Za-z0-9]+)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TransitDestinationIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>182 Place of destination of the transit code 中转目的地代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+			<xs:pattern value="([A-Za-z0-9]+/[A-Za-z0-9]+)|([A-Za-z0-9]+)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LoadingLocationIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>070 Place of loading code 装货地代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+			<xs:pattern value="([A-Za-z0-9]+/[A-Za-z0-9]+)|([A-Za-z0-9]+)"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ConsignmentRoutingCountryCode">
+		<xs:annotation>
+			<xs:documentation>064 Country(ies) of routing,coded 途经的国家代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CountryCode:CountryCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="GoodsConsignedPlaceIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>202 Place or country whence consigned code 货物托运的地点或者国家代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TransportContractDocumentChangeReasonCode">
+		<xs:annotation>
+			<xs:documentation>099 Amendment code 更改原因代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="ChangeReasonCode:ChangeReasonCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ConsignmentCustomsStatusCode">
+		<xs:annotation>
+			<xs:documentation>094 Customs status of goods code 货物海关状态代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CustomsStatusCode:CustomsStatusCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="ConsignmentTransportSplitIndicator">
+		<xs:annotation>
+			<xs:documentation>011 Carrier split  consignment indicator 承运人货物分批到/发货标识</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="TransportSplitCode:TransportSplitCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="FreightPaymentMethodCode">
+		<xs:annotation>
+			<xs:documentation>098 Transport charges method of payment code 运费支付方法代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="PaymentMethodCode:PaymentMethodCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ConsignmentPackagingQuantityQuantity">
+		<xs:annotation>
+			<xs:documentation>146 Total number of packages 托运货物件数</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="8"/>
+			<xs:fractionDigits value="0"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="PackagingTypeCode">
+		<xs:annotation>
+			<xs:documentation>141 Type of packages identification 包装种类代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="PackagingTypeCode:ConsignmentPackagingTypeCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ConsignmentTotalGrossMassMeasure">
+		<xs:annotation>
+			<xs:documentation>131 Total gross weight 货物总毛重</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="14"/>
+			<xs:fractionDigits value="4"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PreviousCustomsDocumentTypeCode">
+		<xs:annotation>
+			<xs:documentation>186 Previous Customs document type code 前一海关单证类型代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PreviousCustomsDocumentIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>007 Previous Customs document number 前一海关单证号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TransportContractDocumentConditionCode">
+		<xs:annotation>
+			<xs:documentation>091 Contract and carriage condition code 运输条款代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="TransportContractDocumentConditionCode:TransportContractDocumentConditionCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="HandlingInstructionsCodeCode">
+		<xs:annotation>
+			<xs:documentation>093 Handling instructions,coded 码头作业指令代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="HandlingInstructionsCode:HandlingInstructionsCodeCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="IntermediateCarrierIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>199 Intermediate Carrier Identification 中间承运人标识</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CommunicationIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>240 Communication number 通讯方式号码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="CommunicationTypeIdentifier">
+		<xs:annotation>
+			<xs:documentation>253 Communication number Type 通讯方式类别代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CommunicationType:CommunicationTypeIdentifier"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ConsigneeIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>052 Consignee coded 收货人代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConsigneeNameText">
+		<xs:annotation>
+			<xs:documentation>051 Consignee name 收货人名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="70"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AddressLineText">
+		<xs:annotation>
+			<xs:documentation>239 Street and number/P.O.Box 详细地址（街道,邮箱）</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="70"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AddressCityNameText">
+		<xs:annotation>
+			<xs:documentation>241 City name 城市名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AddressCountryCode">
+		<xs:annotation>
+			<xs:documentation>242 Country code 国家代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CountryCode:CountryCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="AddressCountrySubEntityNameText">
+		<xs:annotation>
+			<xs:documentation>243 Country sub-entity，name 省份名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AddressCountrySubEntityIdentifier">
+		<xs:annotation>
+			<xs:documentation>244 Country sub-entity 省份代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CountrySubEntityCode:CountrySubEntityCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="AddressPostcodeIdentifier">
+		<xs:annotation>
+			<xs:documentation>245 Postcode identification 邮政编码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="PostCode:PostCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ContactNameText">
+		<xs:annotation>
+			<xs:documentation>246 Department or employee contact name 具体联系人名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConsignorIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>072 Consignor code 发货人代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConsignorNameText">
+		<xs:annotation>
+			<xs:documentation>071 consignor name 发货人名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="70"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeconsolidatorIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>195 Deconsolidator,coded 拆箱人代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConsolidatorIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>193 Consolidator, coded 拼箱人代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NotifyPartyIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>058 Notify party code  通知人代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NotifyPartyNameText">
+		<xs:annotation>
+			<xs:documentation>057 Notify party 通知人名称</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="70"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UNDGContactNameText">
+		<xs:annotation>
+			<xs:documentation>045 Dangerous goods contact details 危险品联系人姓名</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="70"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentIdentificationIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>159 Equipment identification number 集装箱（器）编号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+			<xs:pattern value="[A-Z0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TransportEquipmentCharacteristicCode">
+		<xs:annotation>
+			<xs:documentation>152 Equipment size and type identification 集装箱（器）尺寸和类型</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="TransportEquipmentCharacteristicCode:TransportEquipmentCharacteristicCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TransportEquipmentSupplierPartyTypeCode">
+		<xs:annotation>
+			<xs:documentation>151 Equipment supplier type code 集装箱（器）来源代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="TransportEquipmentSupplierPartyTypeCode:TransportEquipmentSupplierPartyTypeCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="TransportEquipmentFullnessCode">
+		<xs:annotation>
+			<xs:documentation>154 Transport equipment loaded status 重箱或者空箱标识代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="TransportEquipmentFullnessCode:TransportEquipmentFullnessCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="TransportEquipmentSealIdentifier">
+		<xs:annotation>
+			<xs:documentation>165 Seal number 封志号码，类型和施加封志人</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="SealNumber">
+		<xs:annotation>
+			<xs:documentation>封志号码、类型和施加封志人信息</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="TransportEquipmentSealIdentifier">
+				<xs:attribute name="AgencyCode" type="SealAgencyCode:SealAgencyCode" use="required">
+					<xs:annotation>
+						<xs:documentation>230 Seal agency, coded 施加封志人</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ConsignmentItemSequenceNumeric">
+		<xs:annotation>
+			<xs:documentation>006 Consignment item sequence number 托运货物序号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ConsignmentItemPackagingQuantityQuantity">
+		<xs:annotation>
+			<xs:documentation>139 Number of packages per commodity 货物件数</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="8"/>
+			<xs:fractionDigits value="0"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GoodsMeasureGrossMassMeasure">
+		<xs:annotation>
+			<xs:documentation>126 Gross weight item level 货物毛重</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="14"/>
+			<xs:fractionDigits value="4"/>
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CommodityCargoDescriptionText">
+		<xs:annotation>
+			<xs:documentation>138 Brief cargo description  货物简要描述</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="CommodityUNDGCode">
+		<xs:annotation>
+			<xs:documentation>143 UNDG Number(Dangerous Goods Code) 危险品编号</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="UNDGCode:UNDGCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="ConsignmentItemPackagingMarksNumbersText">
+		<xs:annotation>
+			<xs:documentation>142 Shipping marks  唛头</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="512"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="CustomsProcedureCurrentCode">
+		<xs:annotation>
+			<xs:documentation>166 Customs procedure code 海关手续代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CustomsProcedureCode:CustomsProcedureCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="CommodityTariffClassificationCode">
+		<xs:annotation>
+			<xs:documentation>145 Tariff code number(Customs) 海关税则编号（6位HS CODE）</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="OriginOriginCountryCode">
+		<xs:annotation>
+			<xs:documentation>063 Country of origin code 原产国代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CountryCode:CountryCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="UCRIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>016 Unique consignment reference number 唯一托运编号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AdditionalInformationContentText">
+		<xs:annotation>
+			<xs:documentation>105 Free text 备注</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="512"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DeclarationDeclarationOfficeIdentifier">
+		<xs:annotation>
+			<xs:documentation>065 Customs office of declaration, coded 申报地海关代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="CustomsCode:CustomsCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="PartyIdentificationIdentifier">
+		<xs:annotation>
+			<xs:documentation>238 Party ID identification 理货部门代码</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="17"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BorderTransportMeansCargoFacilityLocationText">
+		<xs:annotation>
+			<xs:documentation>204 Cargo Facility Location name 疏港分流分拨到达地点</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--UNTDED-->
+	<xs:complexType name="UNTDEDDateTimeWithZoneText">
+		<xs:annotation>
+			<xs:documentation>UNTDED 2380 Date/time/period UNTDED日期时间</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DateTimeDefine:DateTimeWithZone"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="TransportMeansStowageLocationIdentifier">
+		<xs:annotation>
+			<xs:documentation>UNTDED 8043  Stowage place onboard, coded 船舶贝位</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DamageTypeCode">
+		<xs:annotation>
+			<xs:documentation>UNTDED 7501 Damage type description code 残损类型代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DamageTypeCode:DamageTypeCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="DamageTypeText">
+		<xs:annotation>
+			<xs:documentation>UNTDED 7500 Damage type description 残损类型</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DamageAreaCode">
+		<xs:annotation>
+			<xs:documentation>UNTDED 7503 Damage area description code 残损范围代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DamageAreaCode:DamageAreaCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="DamageAreaText">
+		<xs:annotation>
+			<xs:documentation>UNTDED 7502 Damage area description 残损范围</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DamageSeverityText">
+		<xs:annotation>
+			<xs:documentation>UNTDED 7508 Damage severity description 残损程度</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TransportEquipmentCategoryCode">
+		<xs:annotation>
+			<xs:documentation>UNTDED 8053 特种箱标记代码</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="TransportEquipmentCategoryCode:TransportEquipmentCategoryCode"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="TransportEquipmentReferenceIdentifier">
+		<xs:annotation>
+			<xs:documentation>UNTDED 1154 设备交接单号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="BorderTransportMeansUnloadingDateTime">
+		<xs:annotation>
+			<xs:documentation>UNTDED 2113 卸货开始时间</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="DateTimeDefine:DateTimeWithZone"/>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:simpleType name="FreeTextCode">
+		<xs:annotation>
+			<xs:documentation>UNTDED 4441 进出场目的</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentIdentificationReferenceIdentifier">
+		<xs:annotation>
+			<xs:documentation>UNTDED 1154 装箱单编号</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
