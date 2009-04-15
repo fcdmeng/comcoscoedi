@@ -32,16 +32,20 @@ public class ConnectManager {
 //		String username = "root";
 //		String password = "root";
 		// 生成一个数据库连接
-		try {
-			Class.forName(className);
+		//try {
+			//Class.forName(className);
+			DbUtils.loadDriver(className);
 //			url="jdbc:mysql://localhost:3306/sms?user=root&password=root&characterEncoding=utf-8"; 
 //			con = DriverManager.getConnection(url);
 			con = DriverManager.getConnection(url, username, password);
 
-		} catch (ClassNotFoundException e) {
+		/*} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
+		}*/
 		return con;
+	}
+	public static void closeConn(Connection conn) throws SQLException{
+		DbUtils.close(conn);
 	}
 	
 	public static void closeConnection(){
