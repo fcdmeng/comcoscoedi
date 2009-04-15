@@ -1,0 +1,12 @@
+apache-tuscany-sdo-1.1.1 用于解析xsd文件
+apache-ant-1.7.1-bin   ant.jar  生成zip文件
+commons-dbutils-1.1.tar.gz JDBC连接　网页：http://commons.apache.org/downloads/download_dbutils.cgi
+commons-net-2.0.tar.bz2　FTP连接包   网页：http://commons.apache.org/net/download.html
+commons-beanutils-1.8.0-bin 网页：http://commons.apache.org/beanutils/
+
+commons-io-1.4-bin　输入输出　网页:http://commons.apache.org/downloads/download_io.cgi
+JAXP_142.jar 网页：https://jaxp.dev.java.net/1.4/index.html
+ Jakarta-ORO是最全面以及优化得最好的正则表达式API之一，Jakarta-ORO库以前叫做OROMatcher，是由Daniel F. Savarese编写，后来他赠给Jakarta Project。
+    Jakarta-ORO正则表达式库支持Perl5兼容的正则表达式语法。
+D:\ProCosco\libs\jsr173_1.0_api.jar 这是因为在JDK1.5中，没有XMLStreamWriter这个类。 所以，我们需要导进包含XMLStreamWriter的jar包。这个包是jsr173_1.0_api.jar
+===
