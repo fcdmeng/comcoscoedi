@@ -1,0 +1,161 @@
+循环次数   节点名称
+   1       Manifest
+   1       |______ Head				（报文头）
+   1       |       |______ MessageID				（报文编号）
+   1       |       |______ FunctionCode				（报文功能代码）
+   1       |       |______ MessageType				（报文类型代码）
+   1       |       |______ SenderID					（发送方代码）
+   1       |       |______ ReceiverID				（接受方代码）
+   1       |       |______ SendTime					（发送时间）
+   1       |       |______ Version					（报文版本）
+   1       |______ Declaration		（报文体）
+   1       |       |______ RepresentativePerson		（舱单传输人信息）
+   1       |       |       |______ Name					（舱单传输人名称			ORG_001）
+   1       |       |______ ExitCustomsOffice			（运输工具离境地海关信息）
+   1       |       |       |______ ID					（运输工具离境地海关代码	ORG_002）
+   1       |       |______ Agent						（运输工具代理企业信息）
+   1       |       |       |______ ID					（运输工具代理企业代码		ORG_003）
+   1       |       |______ Carrier					（承运人信息）
+   1       |       |       |______ ID					（承运人代码				ORG_004）
+   1       |       |______ BorderTransportMeans		（运输工具信息）
+   1       |       |       |______ JourneyID				（航次航班编号				ORG_005）
+   1       |       |       |______ TypeCode				（运输方式代码				ORG_006）
+   1       |       |       |______ ID					（运输工具代码				ORG_007）
+   1       |       |       |______ Name					（运输工具名称				ORG_008）
+   1       |       |       |______ FirstArrivalLocationID	（运输工具抵达关境内第一个目的港代码			ORG_010）
+   1       |       |       |______ ArrivalDateTime		（运输工具抵达关境内第一个目的港的日期和时间	ORG_011）
+   1       |       |       |______ DepartureDateTime	 	（运输工具启运日期和时间	ORG_012）
+9999   |       |______ Consignment				（提运单信息）
+   1       |       |       |______ TransportContractDocument	 （运输合同信息）
+   1       |       |       |       |______ ID							（总提单号			ORG_013）
+   3       |       |       |       |______ ChangeReasonCode			（更改原因代码		ORG_027）
+   1       |       |       |       |______ ConditionCode					（运输条款代码		ORG_036）
+   1       |       |       |       |______ Deconsolidator					（拆箱信息）
+   1       |       |       |       |       |______ ID						（拆箱人代码		ORG_064）
+   1       |       |       |______ AssociatedTransportDocument（运输合同附加信息）
+   1       |       |       |       |______ ID							（分提运单号		ORG_014）
+   1       |       |       |______ GrossVolumeMeasure				（货物体积			ORG_015）
+   1       |       |       |______ ValueAmount						（托运货物价值		ORG_016）
+   1       |       |       |       |______ CurrencyTypeCode				（金额类型代码		ORG_017）
+   1       |       |       |______ LoadingLocation			（装货地信息）
+   1       |       |       |       |______ ID							（装货地代码		ORG_024）
+   1       |       |       |       |______ LoadingDate					（货物装载运输工具时间	ORG_009）
+   1       |       |       |______ UnloadingLocation			（卸货地信息）
+   1       |       |       |       |______ ID							（卸货地代码		ORG_018）
+   1       |       |       |       |______ ArrivalDate					（到达卸货地日期	ORG_019）
+   1       |       |       |______ GoodsReceiptPlace		（收货地信息）
+   1       |       |       |       |______ ID							（收货地点代码		ORG_20）
+   1       |       |       |       |______ Name							（收货地点名称		ORG_21）
+   1       |       |       |______ TranshipmentLocation		（中转启运地信息）
+   1       |       |       |       |______ ID							（中转启运地点代码	ORG_022）
+   1       |       |       |______ TransitDestination			（中转目的地信息）
+   1       |       |       |       |______ ID							（中转目的地点代码	ORG_023）
+   1       |       |       |______ RoutingCountryCode		（途经的国家代码			ORG_025）
+   1       |       |       |______ GoodsConsignedPlace		（货物托运地信息）
+   1       |       |       |       |______ ID							（货物托运的地点或者国家代码	ORG_026）
+   1       |       |       |______ CustomsStatusCode		（货物海关状态代码			ORG_028）
+   1       |       |       |______ TransportSplitIndicator		（承运人货物分批到/发货标识	ORG_029）
+   1       |       |       |______ FreightPayment			（运费支付信息）
+   1       |       |       |       |______ MethodCode			（运费支付方代码			ORG_030）
+   1       |       |       |______ ConsignmentPackaging		（提运单包装信息）
+   1       |       |       |       |______ QuantityQuantity		（托运货物件数				ORG_031）
+   1       |       |       |       |______ TypeCode				（包装种类代码				ORG_032）
+   1       |       |       |______ TotalGrossMassMeasure	（货物总毛重				ORG_033）
+   1       |       |       |______ PreviousCustomsDocument	（前一海关单证信息）
+   1       |       |       |       |______ ID							（前一海关单证号	ORG_035）
+   1       |       |       |       |______ TypeCode						（前一海关单证类型代码	ORG_034）
+   1       |       |       |______ DeliveryDestination			（货物交付信息）
+   1       |       |       |       |______ Line							（货物交付目的地地址	ORG_065）
+   1       |       |       |       |______ CityName						（城市名称				ORG_066）
+   1       |       |       |       |______ CountrySubEntityID			（省份代码				ORG_067）
+   1       |       |       |       |______ CountrySubEntityName			（省份名称				ORG_068）
+   1       |       |       |       |______ PostcodeID					（邮政编码				ORG_069）
+   1       |       |       |       |______ CountryCode					（国家代码				ORG_070）
+   1       |       |       |______ Handling					（码头作业信息）
+   1       |       |       |       |______ InstructionsCodeCode			（码头作业指令代码		PRE_037）
+   1       |       |       |______ IntermediateCarrier			（中间承运人信息）
+   1       |       |       |       |______ ID							（中间承运人标识		ORG_038）
+   3       |       |       |       |______ Communication				（中间承运人联系方式）
+   1       |       |       |       |       |______ ID								（中间承运人联系号码	ORG_039）
+   1       |       |       |       |       |______ TypeID							（通讯方式类别代码		ORG_40）
+   1       |       |       |______ Consignee				（收货人信息）
+   1       |       |       |       |______ ID							（收货人代码			ORG_041）
+   1       |       |       |       |______ Name							（收货人名称			ORG_042）
+   1       |       |       |       |______ Address						（收货人地址信息）
+   1       |       |       |       |       |______ Line								（详细地址		ORG_043）
+   1       |       |       |       |       |______ CityName							（城市名称		ORG_044）
+   1       |       |       |       |       |______ CountrySubEntityID				（省份代码		ORG_045）
+   1       |       |       |       |       |______ CountrySubEntityName				（省份名称		ORG_046）
+   1       |       |       |       |       |______ PostcodeID						（邮政编码		ORG_047）
+   1       |       |       |       |       |______ CountryCode						（国家代码		ORG_048）
+   3       |       |       |       |______ Communication				（收货人联系方式）
+   1       |       |       |       |       |______ ID								（收货人联系号码		ORG_049）
+   1       |       |       |       |       |______ TypeID							（通讯方式类别代码		ORG_050）
+   1       |       |       |       |______ Contact						（收货具体联系人信息）
+   1       |       |       |       |       |______ Name							（具体联系人名称		ORG_051）
+   3       |       |       |       |       |______ Communication					（具体联系人联系方式）
+   1       |       |       |       |       |       |______ ID									（具体联系人联系号码	ORG_052）
+   1       |       |       |       |       |       |______ TypeID								（通讯方式类别代码		ORG_053）
+   1       |       |       |______ Consignor					（发货人信息）
+   1       |       |       |       |______ ID							（发货人代码			ORG_054）
+   1       |       |       |       |______ Name							（发货人名称			ORG_055）
+   1       |       |       |       |______ Address						（发货人地址信息）
+   1       |       |       |       |       |______ Line								（详细地址		ORG_056）
+   1       |       |       |       |       |______ CityName							（城市名称		ORG_057）
+   1       |       |       |       |       |______ CountrySubEntityID				（省份代码		ORG_058）
+   1       |       |       |       |       |______ CountrySubEntityName				（省份名称		ORG_059）
+   1       |       |       |       |       |______ PostcodeID						（邮政编码		ORG_060）
+   1       |       |       |       |       |______ CountryCode						（国家代码		ORG_061）
+   3       |       |       |       |______ Communication				（发货人联系方式）
+   1       |       |       |       |       |______ ID								（联系号码			ORG_062）
+   1       |       |       |       |       |______ TypeID							（通讯方式类别代码	ORG_063）
+   1       |       |       |______ NotifyParty					（通知人信息）
+   1       |       |       |       |______ ID							（通知人代码			ORG_071）
+   1       |       |       |       |______ Name							（通知人名称			ORG_072）
+   1       |       |       |       |______ Address						（通知人地址）
+   1       |       |       |       |       |______ Line								（详细地址		ORG_073）
+   1       |       |       |       |       |______ CityName							（城市名称		ORG_074）
+   1       |       |       |       |       |______ CountrySubEntityID				（省份代码		ORG_075）
+   1       |       |       |       |       |______ CountrySubEntityName				（省份名称		ORG_076）
+   1       |       |       |       |       |______ PostcodeID						（邮政编码		ORG_077）
+   1       |       |       |       |       |______ CountryCode						（国家代码		ORG_078）
+   3       |       |       |       |______ Communication				（通知人联系方式）
+   1       |       |       |       |       |______ ID								（联系号码			ORG_079）
+   1       |       |       |       |       |______ TypeID							（通讯方式类别代码	ORG_080）
+   1       |       |       |______ UNDGContact				（危险品联系人信息）
+   1       |       |       |       |______ Name							（危险品联系人姓名		ORG_081）
+   3       |       |       |       |______ Communication				（危险品联系方式）
+   1       |       |       |       |       |______ ID								（联系号码			ORG_082）
+   1       |       |       |       |       |______ TypeID							（联系方式类别代码	ORG_083）
+9999   |       |       |______ TransportEquipment		（集装箱信息）
+   1       |       |       |       |______ EquipmentIdentification			（集装箱编号信息）
+   1       |       |       |       |       |______ ID								（集装箱编号		ORG_084）
+   1       |       |       |       |______ CharacteristicCode				（集装箱尺寸和类型			ORG_085）
+   1       |       |       |       |______ SupplierPartyTypeCode			（集装箱来源代码			ORG_086）
+   1       |       |       |       |______ FullnessCode					（重箱或者空箱标识代码		ORG_087）
+   9       |       |       |       |______ SealID						（封志号码、类型和施加封志人）
+   1       |       |       |       |       |______ AgencyCode				（施加封志人				ORG_088）
+9999   |       |       |______ ConsignmentItem			（托运货物详细信息）
+   1       |       |       |       |______ SequenceNumeric				（托运货物序号				ORG_089）
+   1       |       |       |       |______ ConsignmentItemPackaging		（托运货物详细包装信息）
+   1       |       |       |       |       |______ QuantityQuantity					（货物详细件数		ORG_091）
+   1       |       |       |       |       |______ TypeCode							（包装种类代码		ORG_090）
+   1       |       |       |       |       |______ MarksNumbers						（唛头				ORG_096）
+   1       |       |       |       |______ Commodity					（货物简要信息）
+   1       |       |       |       |       |______ CargoDescription					（货物简要描述		ORG_092）
+   1       |       |       |       |       |______ UNDGCode						（危险品编号		ORG_095）
+   1       |       |       |       |       |______ TariffClassificationCode				（海关税则编号		ORG_098）
+   1       |       |       |       |______ AdditionalInformation			（补充信息）
+   1       |       |       |       |       |______ Content							（货物描述补充信息	ORG_093）
+   1       |       |       |       |______ GoodsMeasure				（货物数量信息）
+   1       |       |       |       |       |______ GrossMassMeasure				（货物毛重			ORG_094）
+9999   |       |       |       |______ EquipmentIdentification			（集装箱编号信息）
+   1       |       |       |       |       |______ ID								（集装箱编号		未知）
+   1       |       |       |       |______ CustomsProcedure				（海关手续信息）
+   1       |       |       |       |       |______ CurrentCode						（海关手续代码		ORG_097）
+  99      |       |       |       |______ UCR							（唯一托运信息）
+   1       |       |       |       |       |______ ID								（唯一托运编号		ORG_100）
+   1       |       |       |       |______ Origin							（原产国信息）
+   1       |       |       |       |       |______ OriginCountryCode					（原产国代码		ORG_099）
+   1       |       |______ AdditionalInformation		（备注）
+   1       |       |       |______ Content						（备注		ORG_101）
