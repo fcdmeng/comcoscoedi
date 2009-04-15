@@ -1,0 +1,6 @@
+Save Format v3.0(19990112)
+@begin Targets
+ 0 "pbdomtest1.pbt";
+@end;
+DefaultTarget "pbdomtest1.pbt";
+DefaultRemoteTarget "pbdomtest1.pbt";
