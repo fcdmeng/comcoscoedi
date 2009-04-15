@@ -1,0 +1,68 @@
+REATE TABLE iuser (
+  Id integer  NOT NULL DEFAULT DEFAULT autoincrement,
+  type char(1) ,
+  userId varchar(10) ,
+  password varchar(20) ,
+  [name] varchar(20),
+  latestOnline datetime,
+  schoolclass_id integer,
+  PRIMARY KEY  (Id)
+);
+
+
+CREATE TABLE schoolclass (
+  Id integer  NOT NULL DEFAULT autoincrement,
+  name varchar(20),
+  grade_id integer,
+  PRIMARY KEY  (Id)
+);
+#
+#  创建年级表
+#
+DROP TABLE IF EXISTS grade;
+CREATE TABLE grade (
+  Id integer  NOT NULL DEFAULT autoincrement,
+  name varchar(20),
+  PRIMARY KEY  (Id)
+);
+#
+#  创建课程表
+#
+DROP TABLE IF EXISTS course;
+CREATE TABLE course (
+  Id integer  NOT NULL DEFAULT autoincrement,
+  name varchar(20),
+  PRIMARY KEY  (Id)
+);
+#
+#  创建老师和课程的联合表
+#
+DROP TABLE IF EXISTS iuser_course;
+CREATE TABLE iuser_course (
+  iuser_id integer  NOT NULL,
+  course_id integer  NOT NULL
+);
+#
+#  创建考试表
+#
+DROP TABLE IF EXISTS exam;
+CREATE TABLE exam (
+  Id integer  NOT NULL DEFAULT autoincrement,
+  name varchar(50),
+  iuser_id integer ,
+  course_id integer ,
+  schoolclass_id integer ,
+  date timestamp,
+  PRIMARY KEY  (Id)
+);
+#
+#  创建成绩表
+#
+DROP TABLE IF EXISTS studentscore;
+CREATE TABLE studentscore (
+  Id integer  NOT NULL DEFAULT autoincrement,
+  exam_id integer,
+  iuser_id integer ,
+  score float ,
+  PRIMARY KEY  (Id)
+);
