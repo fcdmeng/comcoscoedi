@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="F:/workspace/xml/jaxen-1.1-beta-2.jar"/>
+	<classpathentry kind="lib" path="F:/workspace/xml/xbean.jar"/>
+	<classpathentry kind="lib" path="F:/workspace/xml/xbean_xpath.jar"/>
+	<classpathentry kind="lib" path="uw.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
