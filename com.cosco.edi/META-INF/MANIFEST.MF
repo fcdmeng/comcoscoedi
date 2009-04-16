@@ -13,11 +13,7 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .,
  libs/mysql-connector-java-5.0.4-bin.jar,
- libs/jakarta-oro-2.0.8.jar,
  libs/commons-validator-1.3.1.jar,
- libs/jt400.jar,
- libs/jt400Mri_zh.jar,
- libs/jt400Servlet.jar,
  libs/jdbcdrv.jar,
  libs/jconn3.jar,
  libs/xml-apis.jar,
@@ -27,7 +23,6 @@ Bundle-ClassPath: .,
  libs/ant.jar,
  libs/commons-lang-2.4/commons-lang-2.4.jar,
  libs/commons-dbutils-1.1/commons-dbutils-1.1/commons-dbutils-1.1.jar,
- libs/commons-net-2.0/commons-net-2.0/commons-net-2.0-javadoc.jar,
  libs/commons-net-2.0/commons-net-2.0/commons-net-2.0-sources.jar,
  libs/commons-net-2.0/commons-net-2.0/commons-net-2.0.jar,
  libs/commons-net-2.0/commons-net-2.0/commons-net-ftp-2.0.jar,
@@ -36,7 +31,7 @@ Bundle-ClassPath: .,
  libs/commons-beanutils-1.8.0-bin/commons-beanutils-1.8.0/commons-beanutils-1.8.0.jar,
  libs/commons-beanutils-1.8.0-bin/commons-beanutils-1.8.0/commons-beanutils-bean-collections-1.8.0.jar,
  libs/commons-beanutils-1.8.0-bin/commons-beanutils-1.8.0/commons-beanutils-core-1.8.0.jar,
- libs/commons-io-1.4-bin/commons-io-1.4/commons-io-1.4.jar,
- libs/jconn2.jar
+ libs/jconn2.jar,
+ libs/commons-io-1.4-bin/commons-io-1.4/commons-io-1.4.jar
 Bundle-Vendor: 中国远洋船舶代理业务管理系统-个人版(QINGDAO)
 
