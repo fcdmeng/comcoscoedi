@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Sms_ Plug-in
 Bundle-SymbolicName: com.cosco.edi;singleton:=true
-Bundle-Version: 1.0.1
+Bundle-Version: 1.0.0
 Bundle-Activator: cosco.vsagent.app.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -13,23 +13,16 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .,
  libs/commons-validator-1.3.1.jar,
- libs/jdbcdrv.jar,
- libs/xml-apis.jar,
  libs/crimson.jar,
  libs/log4j-1.2.13.jar,
  libs/commons-logging-1.1.1.jar,
  libs/ant.jar,
- libs/commons-lang-2.4/commons-lang-2.4.jar,
- libs/commons-dbutils-1.1/commons-dbutils-1.1/commons-dbutils-1.1.jar,
- libs/commons-net-2.0/commons-net-2.0/commons-net-2.0-sources.jar,
- libs/commons-net-2.0/commons-net-2.0/commons-net-2.0.jar,
- libs/commons-net-2.0/commons-net-2.0/commons-net-ftp-2.0.jar,
- libs/commons-beanutils-1.8.0-bin/commons-beanutils-1.8.0/commons-beanutils-1.8.0-javadoc.jar,
- libs/commons-beanutils-1.8.0-bin/commons-beanutils-1.8.0/commons-beanutils-1.8.0-sources.jar,
- libs/commons-beanutils-1.8.0-bin/commons-beanutils-1.8.0/commons-beanutils-1.8.0.jar,
- libs/commons-beanutils-1.8.0-bin/commons-beanutils-1.8.0/commons-beanutils-bean-collections-1.8.0.jar,
- libs/commons-beanutils-1.8.0-bin/commons-beanutils-1.8.0/commons-beanutils-core-1.8.0.jar,
  libs/jconn2.jar,
- libs/commons-io-1.4-bin/commons-io-1.4/commons-io-1.4.jar
+ libs/commons-dbutils-1.1.jar,
+ libs/commons-lang-2.4.jar,
+ libs/commons-beanutils-1.8.0.jar,
+ libs/commons-beanutils-bean-collections-1.8.0.jar,
+ libs/commons-beanutils-core-1.8.0.jar,
+ libs/commons-io-1.4.jar
 Bundle-Vendor: 中国远洋船舶代理业务管理系统-专业版(QINGDAO)
 
