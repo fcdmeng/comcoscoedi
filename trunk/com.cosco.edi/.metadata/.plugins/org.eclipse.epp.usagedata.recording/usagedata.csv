@@ -1,0 +1,10 @@
+what,kind,bundleId,bundleVersion,description,time
+stopped,bundle,org.eclipse.mylyn.java.ui,3.0.0.v20080619-1900,org.eclipse.mylyn.java.ui,1227144223733
+stopped,bundle,org.eclipse.jdt.junit,3.4.0.v20080603-2000,org.eclipse.jdt.junit,1227144223733
+stopped,bundle,org.eclipse.jdt.debug.ui,3.3.0.v20080603,org.eclipse.jdt.debug.ui,1227144223733
+stopped,bundle,com.instantiations.css,5.0.0.200808162138,com.instantiations.css,1227144223733
+stopped,bundle,com.instantiations.designer.gwt.hosted.1_4.ie,5.1.0.200808171209,com.instantiations.designer.gwt.hosted.1_4.ie,1227144223749
+stopped,bundle,com.instantiations.designer.gwt.hosted.1_4,5.1.0.200808171209,com.instantiations.designer.gwt.hosted.1_4,1227144223827
+stopped,bundle,com.instantiations.designer.gwt.hosted.1_5.ie,5.1.0.200808171209,com.instantiations.designer.gwt.hosted.1_5.ie,1227144223858
+stopped,bundle,com.instantiations.designer.gwt.hosted.1_5,5.1.0.200808171209,com.instantiations.designer.gwt.hosted.1_5,1227144223952
+stopped,bundle,com.instantiations.eclipse.ui,5.3.2.200808162032,com.instantiations.eclipse.ui,1227144223952
