@@ -37,36 +37,21 @@ public class DAO {
 		QueryRunner run = new QueryRunner();
 
 		List result = (List) run.query(conn, sql, params, rsh);
-
 		DbUtils.close(conn);
-
+		
 		return result;
 
 	}
 
-	public void update(String sql, Object[] params) throws SQLException
+	public void update(String sql, Object[] params) throws SQLException 
 
 	{
 		Connection conn = ConnectManager.getConnection();
-
 		QueryRunner run = new QueryRunner();
-
 		run.update(conn, sql, params);
 
 		DbUtils.close(conn);
 	}
 
-	public void update(String sql) {
-		try {
-			Connection conn = ConnectManager.getConnection();
-			QueryRunner qr = new QueryRunner();
-			ResultSetHandler rsh = new ArrayListHandler();
-			qr.update(conn, sql);
-			DbUtils.close(conn);
-		} catch (Exception ex) {
-			ex.printStackTrace(System.out);
-		}
-		
-	}
-
+	
 }
